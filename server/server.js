@@ -23,6 +23,17 @@ app.post('/todos', (req, res) => {
   });
 });
 
+// send back an object-> more flexible future
+// test via postman - > emoty
+// make todos, try again
+app.get('/todos', (req, res) => {
+  Todo.find().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
+  });
+});
+
 app.listen(3000, () => {
   console.log('Started on port 3000');
 })
