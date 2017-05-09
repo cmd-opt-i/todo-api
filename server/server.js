@@ -7,11 +7,9 @@ var { User } = require('./models/users');
 
 var app = express();
 
-/* Middleware */
 app.use(bodyParser.json())
 
 app.post('/todos', (req, res) => {
-  console.log(req.body);
   var todo = new Todo({
     text: req.body.text
   });
@@ -23,12 +21,9 @@ app.post('/todos', (req, res) => {
   });
 });
 
-// send back an object-> more flexible future
-// test via postman - > emoty
-// make todos, try again
 app.get('/todos', (req, res) => {
-  Todo.find().then((doc) => {
-    res.send(doc);
+  Todo.find().then((todos) => {
+    res.send({todos});
   }, (e) => {
     res.status(400).send(e);
   });
